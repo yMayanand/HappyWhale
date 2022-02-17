@@ -29,6 +29,10 @@ class Dataset:
 
             image1 = Image.open(path1)
             image2 = Image.open(path2)
+        if self.transform is not None:
+            image1 = self.transform(image1)
+            image2 = self.transform(image2)
+        return image1, image2, label
 
 
 
