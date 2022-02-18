@@ -2,13 +2,14 @@ import numpy as np
 from PIL import Image
 
 class Dataset:
-    def __init__(self, df, transform=None, level='species'):
+    def __init__(self, df, transform=None, level='species', samples=1000):
         self.level = level
         self.df = df
+        self.samples = samples
         self.transform = transform
 
     def __len__(self):
-        return len(self.df)
+        return self.samples
 
     def __getitem__(self, idx):
         choice = np.random.choice([0, 1])
