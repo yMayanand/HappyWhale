@@ -1,7 +1,8 @@
 import numpy as np
 from PIL import Image
+from torchvision import Dataset
 
-class Dataset:
+class TrainDataset:
     def __init__(self, df, transform=None, level='species', samples=1000):
         self.level = level
         self.df = df
