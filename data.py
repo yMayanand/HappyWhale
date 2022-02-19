@@ -26,8 +26,12 @@ class TrainDataset(Dataset):
             path1 = np.random.choice(self.df[self.df[self.level]==class1]['image_path'])
             path2 = np.random.choice(self.df[self.df[self.level]==class2]['image_path'])
 
-        image1 = Image.open(path1).convert('RGB')
-        image2 = Image.open(path2).convert('RGB')
+        image1 = Image.open(path1)
+        if len(image1.getbands()) != 3:
+            image1 = image1.convert('RGB')
+        image2 = Image.open(path2)
+        if len(image2.getbands()) != 3:
+            image2 = image2.convert('RGB')
         if self.transform is not None:
             image1 = self.transform(image1)
             image2 = self.transform(image2)
