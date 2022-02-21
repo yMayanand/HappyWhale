@@ -30,8 +30,8 @@ class TrainDataset(Dataset):
 
             path1 = np.random.randint(len(new_df1))
             path2 = np.random.randint(len(new_df2))
-            path1 = new_df[path1]
-            path2 = new_df[path2]
+            path1 = new_df1[path1]
+            path2 = new_df2[path2]
 
         image1 = Image.open(path1)
         if len(image1.getbands()) != 3:
