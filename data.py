@@ -17,14 +17,21 @@ class TrainDataset(Dataset):
         if choice:
             label = 1 
             class1 = class2 = np.random.choice(self.df[self.level])
+            new_df = self.df[self.df[self.level]==class1]['image_path'].reset_index(drop=True)
 
-            path1, path2 = np.random.choice(self.df[self.df[self.level]==class1]['image_path'], size=2, replace=False)
+            path1, path2 = np.random.randint(len(new_df), size=2)
+            path1 = new_df[path1]
+            path2 = new_df[path2]
         else: 
             label = 0
             class1, class2 = np.random.choice(self.df[self.level], size=2, replace=False)
+            new_df1 = self.df[self.df[self.level]==class1]['image_path'].reset_index(drop=True)
+            new_df2 = self.df[self.df[self.level]==class2]['image_path'].reset_index(drop=True)
 
-            path1 = np.random.choice(self.df[self.df[self.level]==class1]['image_path'])
-            path2 = np.random.choice(self.df[self.df[self.level]==class2]['image_path'])
+            path1 = np.random.randint(len(new_df1))
+            path2 = np.random.randint(len(new_df2))
+            path1 = new_df[path1]
+            path2 = new_df[path2]
 
         image1 = Image.open(path1)
         if len(image1.getbands()) != 3:
